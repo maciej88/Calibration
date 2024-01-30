@@ -6,7 +6,6 @@ from django.db import models
 class InstructionTypes(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=128)
-    description = models.TextField()
 
     def __str__(self):
         return self.name
@@ -41,7 +40,7 @@ class Services(models.Model):
         return self.name
 
 
-class Probe(models.Model):
+class Probes(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=128, unique=False)
     technology_id = models.CharField(max_length=128, unique=False)
@@ -52,7 +51,7 @@ class Probe(models.Model):
     place = models.ManyToManyField('Places')
     description = models.TextField()
     instruction = models.ManyToManyField('Instructions')
-    service = models.ManyToManyField('Services')
+    service = models.ForeignKey('Services', blank=True, null=True, on_delete=models.CASCADE)
     status = models.BooleanField(default=True)
 
     def __str__(self):
@@ -62,4 +61,4 @@ class Probe(models.Model):
 class Overviews(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True)
     overview_date = models.DateTimeField(auto_now_add=True, editable=True)
-    probe = models.ManyToManyField('Probe')
+    probe = models.ManyToManyField('Probes')
