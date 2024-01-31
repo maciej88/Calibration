@@ -30,16 +30,6 @@ class Places(models.Model):
         return self.name
 
 
-class Services(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    name = models.CharField(max_length=128)
-    datetime = models.DateTimeField(auto_now_add=True, editable=True)
-    # file = models.FileField(upload_to='#todo') # todo!!!!
-
-    def __str__(self):
-        return self.name
-
-
 class Probes(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(max_length=128, unique=False)
@@ -51,8 +41,18 @@ class Probes(models.Model):
     place = models.ManyToManyField('Places')
     description = models.TextField()
     instruction = models.ManyToManyField('Instructions')
-    service = models.ForeignKey('Services', blank=True, null=True, on_delete=models.CASCADE)
     status = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Services(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    name = models.CharField(max_length=128)
+    datetime = models.DateTimeField(auto_now_add=True, editable=True)
+    probe = models.ForeignKey(Probes, related_name='services', on_delete=models.CASCADE)
+    # file = models.FileField(upload_to='#todo') # todo!!!!
 
     def __str__(self):
         return self.name
