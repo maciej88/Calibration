@@ -1,6 +1,5 @@
-from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
-from calib_management.models import *
+from calib_management.models import Probes, Services, Places
 from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm
 
 
@@ -15,7 +14,7 @@ class PlaceUpdateView(UpdateView):
     template_name = 'installation_create.html'
     model = Places
     form_class = PlaceForm
-    success_url = '/installations'
+    success_url = '/installations/'
 
 
 class PlaceListView(ListView):
@@ -116,3 +115,4 @@ class ServiceDetailView(DetailView):
     model = Services
     template_name = 'service_detail.html'
     context_object_name = 'service'
+
