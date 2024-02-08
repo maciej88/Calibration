@@ -1,6 +1,8 @@
 from django import forms
 from calib_management.models import Places, Probes, Services
 
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class PlaceForm(forms.ModelForm):
     class Meta:
@@ -45,3 +47,19 @@ class ServiceForm(forms.ModelForm):
                                                    'placeholder': 'Select a date', 'type': 'date'}),
             'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
         }
+
+
+class CustomUserCreationForm(UserCreationForm):
+    first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
+    last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
+    username = forms.CharField(max_length=30, required=True, help_text='Wymagane')
+    password1 = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Hasło', 'type': 'password'})
+    password2 = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Powtórz hasło', 'type': 'password'})
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
+
+
+class LogoutForm(forms.Form):
+    pass

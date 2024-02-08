@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path
 from calib_management.views import *
 
+from django.contrib.auth import views as auth_views
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', ProbeListView.as_view(), name='probe_list'),
@@ -34,4 +37,7 @@ urlpatterns = [
     path('service-delete/<uuid:pk>/delete/', ServiceDeleteView.as_view(), name='service-delete'),
     path('service-update/<uuid:pk>/update/', ServiceUpdateView.as_view(), name='service-update'),
     path('service-detail/<uuid:pk>', ServiceDetailView.as_view(), name='service-detail'),
+    path('register/', register, name='register'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html', success_url='/'), name='login'),
+    path('logout/', CustomLogoutView.as_view(), name='logout'),
 ]

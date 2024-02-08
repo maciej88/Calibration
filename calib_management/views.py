@@ -1,6 +1,11 @@
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from calib_management.models import Probes, Services, Places
 from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm
+from django.views import View
+
+from django.shortcuts import render, redirect
+from .forms import CustomUserCreationForm
+from django.contrib.auth import logout
 
 
 class PlaceCreateView(CreateView):
@@ -116,3 +121,22 @@ class ServiceDetailView(DetailView):
     template_name = 'service_detail.html'
     context_object_name = 'service'
 
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+
+class CustomLogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect('/')
+
+    def post(self, request):
+        return self.get(request)
