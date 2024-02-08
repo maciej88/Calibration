@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dodaj serwis dla sondy {{ probe.name }}</title>
+</head>
+<body>
+    <h1>Dodaj serwis dla sondy {{ probe.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Dodaj serwis</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Szczegóły obsługi</title>
+</head>
+<body>
+    <h1>Obsługa: {{ service.name }}</h1>
+    <p>Rodzaj obsługi: {{ service.name }}</p>
+    <p>Data wykonania: {{ service.datetime }}</p>
+    <p>Obsługiwane urządzenie: {{ service.probe }}</p>
+    <p>Termin kolejnej obsługi: {{ service.next_service }}</p>
+    <p>Opis wykonanych czynności: {{ service.description }}</p>
+    <a href="{% url 'service-list' %}">Powrót do listy</a>
+    <a type="button" href="{% url 'service-update' pk=service.id %}">"Modyfikuj"</a>
+    <a type="button" href="{% url 'service-delete' pk=service.id %}">"Usuń"</a>
+</body>
+</html>

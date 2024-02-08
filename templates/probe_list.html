@@ -1,0 +1,13 @@
+<h1>Sondy</h1>
+<ul>
+{% for probe in object_list %}
+    <li>
+        <a href="{% url 'probe-detail' pk=probe.id %}">{{ probe.name }}</a>
+        <a type="button" href="{% url 'probe-delete' pk=probe.id %}">"Usuń"</a>
+        <a type="button" href="{% url 'probe-update' pk=probe.id %}">"Modyfikuj"</a>
+        
+    </li>
+{% empty %}
+    <li>Nie dodano żadnej sondy.</li>
+{% endfor %}
+</ul>
