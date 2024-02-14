@@ -38,6 +38,9 @@ class Probes(models.Model):
     def __str__(self):
         return self.name
 
+    def get_latest_service(self):
+        return self.services.order_by('-datetime').first()
+
 
 class Services(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)

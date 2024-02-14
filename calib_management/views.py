@@ -2,27 +2,28 @@ from django.views.generic import ListView, CreateView, DeleteView, UpdateView, D
 from calib_management.models import Probes, Services, Places
 from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import logout
 
 
-class PlaceCreateView(CreateView):
+class PlaceCreateView(LoginRequiredMixin, CreateView):
     template_name = 'installation_create.html'
     model = Places
     form_class = PlaceForm
     success_url = '/installations-list/'
 
 
-class PlaceUpdateView(UpdateView):
+class PlaceUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'installation_create.html'
     model = Places
     form_class = PlaceForm
     success_url = '/installations/'
 
 
-class PlaceListView(ListView):
+class PlaceListView(LoginRequiredMixin, ListView):
     model = Places
     template_name = 'installations_list.html'
 
@@ -31,7 +32,7 @@ class PlaceListView(ListView):
         return context
 
 
-class PlaceDeleteView(DeleteView):
+class PlaceDeleteView(LoginRequiredMixin, DeleteView):
     model = Places
     template_name = 'installation_delete.html'
     success_url = '/installations-list/'
@@ -40,27 +41,27 @@ class PlaceDeleteView(DeleteView):
 class ProbeListView(ListView):
     model = Probes
     template_name = 'probe_list.html'
-    context_object_name = 'probes'  # Nazwa obiektu kontekstu przekazywanego do szablonu
+    context_object_name = 'probes'
 
     def get_queryset(self):
-        return Probes.objects.all()
+        return Probes.objects.prefetch_related('services')
 
 
-class ProbeCreateView(CreateView):
+class ProbeCreateView(LoginRequiredMixin, CreateView):
     model = Probes
     template_name = 'probe_create.html'
     form_class = ProbeForm
     success_url = '/'
 
 
-class ProbeUpdateView(UpdateView):
+class ProbeUpdateView(LoginRequiredMixin, UpdateView):
     model = Probes
     template_name = 'probe_update.html'
     form_class = ProbeUpdateForm
     success_url = '/'
 
 
-class ProbeDeleteView(DeleteView):
+class ProbeDeleteView(LoginRequiredMixin, DeleteView):
     model = Probes
     template_name = 'probe_delete.html'
     success_url = '/'
@@ -103,13 +104,13 @@ class ServiceListView(ListView):
         return context
 
 
-class ServiceDeleteView(DeleteView):
+class ServiceDeleteView(LoginRequiredMixin, DeleteView):
     model = Services
     template_name = 'service_delete.html'
     success_url = '/service-list/'
 
 
-class ServiceUpdateView(UpdateView):
+class ServiceUpdateView(LoginRequiredMixin, UpdateView):
     model = Services
     form_class = ServiceForm
     template_name = 'service_add.html'

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<head>
+    <title>Kalibrace</title>
+</head>
+{% if user.is_authenticated %}
+<a href="{% url 'probe-list' %}"><button>Lista sond pomiarowych</button></a>
+<a href="{% url 'probe-create' %}"><button>Dodaj sondę</button></a>
+<a href="{% url 'place-list' pk=probe.id %}"><button>Lisa instalacji</button></a>
+<a href="{% url 'place-create' pk=probe.id %}"><button>Dodaj instalację</button></a>
+<a href="{% url 'logout' %}"><button>Wyloguj</button></a>
+{% else %}
+<a href="{% url 'login' %}"><button>Zaloguj</button></a>
+{% endif %}
+{% load static %}
+{#    <link rel="stylesheet" href="css/style.css" />#}
+
+{% block content %}
+
+{% endblock %}
+
+</html>
