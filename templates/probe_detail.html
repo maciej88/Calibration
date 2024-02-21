@@ -1,13 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 <head>
-    <meta charset="UTF-8">
     <title>{{ object.name }} - Szczegóły sondy</title>
 </head>
-<body>
-    <h1>{{ object.name }} - Szczegóły sondy</h1>
-    <p>Nazwa: {{ object.name }}</p>
-    <a type="button" href="{% url 'add-service' pk=object.id %}">"dodaj serwis"</a>
+    <body>
+    <table border="1">
+  <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Numer technologiczny</th>
+      <th>Instalacja</th>  
+      <th>Następny serwis do:</th>  
+      <th>Numer seryjny</th>
+      <th>Producent</th>  
+      <th>Model</th>
+      <th>Data montażu</th>  
+      <th>Czy sprawna</th>  
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>{{ object.name }}</td>
+        <td>{{ object.technology_id }}</td>
+        <td>{{ object.place }}</td>
+        <td>{{ object.get_latest_service.next_service|date:"d.m.Y" }}</td>
+        <td>{{ object.serial_number }}</td>
+        <td>{{ object.factory }}</td>
+        <td>{{ object.probe_model }}</td>
+        <td>{{ object.setup_date|date:"d.m.Y" }}</td>
+        <td>
+            {% if object.status == True %} Tak
+        {% else %}
+            Nie sprawna 
+        {% endif %}
+        </td>
+      </tr>
+  </tbody>
+    </table>
+    <p>Opis:</p>
+      <p>{{ object.description }}</p>
+    <a type="button" href="{% url 'add-service' pk=object.id %}"><button>"dodaj serwis"</button></a>
+    
     {% if last_service %}
     <h2>Ostatni serwis</h2>
     <p>Rodzaj obsługi: {{ last_service.name }}</p>
@@ -15,4 +48,4 @@
     <p>Następna obsługa: {{ last_service.next_service|date:"d.m.Y" }}</p>    
     {% endif %}
 </body>
-</html>
+{% endblock %}

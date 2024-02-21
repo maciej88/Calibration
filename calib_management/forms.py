@@ -62,9 +62,12 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
+    last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
+    username = forms.CharField(max_length=30, required=True, help_text='Wymagane')
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'password')
+        fields = ('username', 'first_name', 'last_name')
 
 
 class LogoutForm(forms.Form):

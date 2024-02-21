@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base.html' %}
+{% block content %}
 <head>
     <title>Dodaj serwis dla sondy {{ probe.name }}</title>
 </head>
@@ -9,6 +9,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Dodaj serwis</button>
+        <a href="{% url 'probe_list' %}"><button>Lista sond pomiarowych</button></a>
     </form>
 </body>
-</html>
+{% endblock %}

@@ -1,3 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
 <h1>Lista wykonanych czynności</h1>
 <ul>
 {% for service in object_list %}
@@ -11,3 +13,4 @@
     <li>Nie dodano żadnej sondy.</li>
 {% endfor %}
 </ul>
+{% endblock %}

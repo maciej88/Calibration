@@ -1,4 +1,6 @@
 <h1>Instalacje i miejsca</h1>
+{% extends 'base.html' %}
+{% block content %}
 <ul>
 {% for place in object_list %}
     <li>{{ place.name }} 
@@ -8,3 +10,4 @@
     <li>Nie dodano żadnej instalacji.</li>
 {% endfor %}
 </ul>
+{% endblock %}

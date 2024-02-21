@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from calib_management.models import Probes, Services, Places
-from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm
+from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm, UserUpdateForm
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -154,9 +154,9 @@ class CustomLogoutView(LoginRequiredMixin, View):
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
-    fields = ['username', 'first_name', 'last_name', 'password']
     template_name = 'user_update.html'
     success_url = reverse_lazy('user-detail')
+    form_class = UserUpdateForm
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):

@@ -1,8 +1,6 @@
-
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block content %}
 <head>
-    <meta charset="UTF-8">
     <title>Szczegóły obsługi</title>
 </head>
 <body>
@@ -16,4 +14,4 @@
     <a type="button" href="{% url 'service-update' pk=service.id %}">"Modyfikuj"</a>
     <a type="button" href="{% url 'service-delete' pk=service.id %}">"Usuń"</a>
 </body>
-</html>
+{% endblock %}
