@@ -9,9 +9,9 @@
 <a href="{% url 'probe-create' %}"><button>Dodaj sondę</button></a>
 <a href="{% url 'place-list' %}"><button>Lisa instalacji</button></a>
 <a href="{% url 'place-create' %}"><button>Dodaj instalację</button></a>
+<a href="{% url 'service-list' %}"><button>Lista serwisów</button></a>     
 <a href="{% url 'user-detail' pk=user.id %}"><button>Szczegóły konta</button></a>
 <a href="{% url 'user-update' pk=user.id %}"><button>Modyfikuj konto</button></a>
-<a href="{% url 'service-list' %}"><button>Lista serwisów</button></a>    
 <a href="{% url 'logout' %}"><button>Wyloguj</button></a>
 {% else %}
 <a href="{% url 'login' %}"><button>Zaloguj</button></a>

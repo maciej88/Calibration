@@ -1,6 +1,6 @@
 from django import forms
 from calib_management.models import Places, Probes, Services
-
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -65,9 +65,33 @@ class UserUpdateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
     username = forms.CharField(max_length=30, required=True, help_text='Wymagane')
+
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name')
+
+
+class PassChangeForm(PasswordChangeForm):
+    old_password = forms.CharField(label="Stare hasło", widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Stare hasło'}))
+    new_password1 = forms.CharField(label="Nowe hasło", widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Nowe hasło'}))
+    new_password2 = forms.CharField(label="Powtórz nowe hasło", widget=forms.PasswordInput(
+        attrs={'class': 'form-control', 'placeholder': 'Powtórz nowe hasło'}))
+
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
+        super().__init__(user, *args, **kwargs)
+
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self.fields['new_password1'].errorlist = {
+    #         'required': 'To pole jest wymagane.',
+    #         'password_too_short': 'Hasło musi zawierać co najmniej 8 znaków.',
+    #         'password_common': 'Hasło nie może być powszechnie używanym hasłem.',
+    #         'password_entirely_numeric': 'Hasło nie może składać się wyłącznie z cyfr.',
+    #         'password_similar': 'Hasło nie może być zbyt podobne do innych Twoich danych osobowych.',
+    #     }
 
 
 class LogoutForm(forms.Form):

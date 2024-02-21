@@ -1,10 +1,11 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from calib_management.models import Probes, Services, Places
-from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm, UserUpdateForm
+from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm, UserUpdateForm, PassChangeForm
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordChangeDoneView
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import logout
@@ -162,3 +163,17 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
+
+
+class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    model = User
+    template_name = 'user_pass_change.html'
+    form_class = PassChangeForm
+
+    def get_success_url(self):
+        return reverse_lazy('user-detail', kwargs={'pk': self.request.user.pk})
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
