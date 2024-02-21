@@ -1,7 +1,7 @@
 <h1>Sondy</h1>
 {% extends 'base.html' %}
 {% block content %}
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Nazwa</th>
@@ -12,6 +12,7 @@
     </tr>
   </thead>
   <tbody>
+  {% if object_list %}
     {% for probe in object_list %}
       <tr>
         <td>{{ probe.name }}</td>
@@ -20,15 +21,18 @@
         <td>{{ probe.get_latest_service.next_service|date:"d.m.Y" }}</td>
         <td>
           <a href="{% url 'probe-detail' pk=probe.id %}"><button>Szczegóły</button></a>
+            {% if user.is_authenticated %}
           <a type="button" href="{% url 'probe-delete' pk=probe.id %}"><button>Usuń</button></a>
           <a type="button" href="{% url 'probe-update' pk=probe.id %}"><button>Modyfikuj</button></a>
+            {% endif %}
         </td>
       </tr>
-    {% empty %}
+    {% endfor %}
+  {% else %}
       <tr>
         <td colspan="2">Nie dodano żadnej sondy.</td>
       </tr>
-    {% endfor %}
+  {% endif %}
   </tbody>
 </table>
 {% endblock %}
