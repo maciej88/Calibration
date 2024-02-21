@@ -1,12 +1,16 @@
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from calib_management.models import Probes, Services, Places
 from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import logout
+
+
+# --- Place CRUD ---
 
 
 class PlaceCreateView(LoginRequiredMixin, CreateView):
@@ -36,6 +40,8 @@ class PlaceDeleteView(LoginRequiredMixin, DeleteView):
     model = Places
     template_name = 'installation_delete.html'
     success_url = '/installations-list/'
+
+# --- Probe CRUD ---
 
 
 class ProbeListView(ListView):
@@ -81,6 +87,8 @@ class ProbeDetailView(DetailView):
 
         return context
 
+# --- Service CRUD ---
+
 
 class ServiceCreateView(CreateView):
     model = Services
@@ -123,6 +131,7 @@ class ServiceDetailView(DetailView):
     context_object_name = 'service'
 
 
+# --- User CRU ---
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -134,10 +143,22 @@ def register(request):
     return render(request, 'register.html', {'form': form})
 
 
-class CustomLogoutView(View):
+class CustomLogoutView(LoginRequiredMixin, View):
     def get(self, request):
         logout(request)
         return redirect('/')
 
     def post(self, request):
         return self.get(request)
+
+
+class UserUpdateView(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ['username', 'first_name', 'last_name', 'password']
+    template_name = 'user_update.html'
+    success_url = reverse_lazy('user-detail')
+
+
+class UserDetailView(LoginRequiredMixin, DetailView):
+    model = User
+    template_name = 'user_detail.html'

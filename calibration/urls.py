@@ -39,5 +39,7 @@ urlpatterns = [
     path('service-detail/<uuid:pk>', ServiceDetailView.as_view(), name='service-detail'),
     path('register/', register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='login.html', success_url='/'), name='login'),
+    path('user/<int:pk>/update/', UserUpdateView.as_view(), name='user-update'),
+    path('user/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
 ]
