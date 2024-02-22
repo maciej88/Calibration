@@ -44,7 +44,7 @@
     {% if last_service %}
     <h2>Ostatni serwis</h2>
     <p>Rodzaj obsługi: {{ last_service.name }}</p>
-    <p>Data wykonania: {{ last_service.datetime|date:"d.m.Y" }}</p>
+    <p>Data wykonania: {{ last_service.date_time|date:"d.m.Y" }}</p>
     <p>Następna obsługa: {{ last_service.next_service|date:"d.m.Y" }}</p>    
     {% endif %}
 </body>

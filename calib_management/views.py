@@ -5,10 +5,11 @@ from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, Servic
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.contrib.auth.views import PasswordChangeView, PasswordResetView, PasswordChangeDoneView
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import render, redirect
 from .forms import CustomUserCreationForm
 from django.contrib.auth import logout
+from .filters import ProbeFilter, ServiceFilter
 
 
 # --- Place CRUD ---
@@ -50,8 +51,13 @@ class ProbeListView(ListView):
     template_name = 'probe_list.html'
     context_object_name = 'probes'
 
-    def get_queryset(self):
-        return Probes.objects.prefetch_related('services')
+    # def get_queryset(self):
+    #     return Probes.objects.prefetch_related('services')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter'] = ProbeFilter(self.request.GET, queryset=self.get_queryset())
+        return context
 
 
 class ProbeCreateView(LoginRequiredMixin, CreateView):
@@ -83,7 +89,7 @@ class ProbeDetailView(DetailView):
         probe = self.get_object()
 
         # Pobranie wpisu z najwyższą datą next_service
-        last_service = probe.services.order_by('-datetime').first()
+        last_service = probe.services.order_by('-date_time').first()
         context['last_service'] = last_service
 
         return context
@@ -108,8 +114,13 @@ class ServiceListView(ListView):
     model = Services
     template_name = 'service_list.html'
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     return context
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['filter'] = ServiceFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
 

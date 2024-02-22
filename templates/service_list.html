@@ -1,16 +1,47 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Lista wykonanych czynności</h1>
-<ul>
-{% for service in object_list %}
-    <li>
-        <a href="{% url 'service-detail' pk=service.id %}">{{ service.name }} - {{ service.name }} - {{ service.datetime }} - {{ service.probe }}</a>
-        <a type="button" href="{% url 'service-delete' pk=service.id %}">"Usuń"</a>
-        <a type="button" href="{% url 'service-update' pk=service.id %}">"Modyfikuj"</a>
-        
-    </li>
-{% empty %}
-    <li>Nie dodano żadnej sondy.</li>
-{% endfor %}
-</ul>
+    <form method="get">
+
+    {{ filter.form.as_p }}
+  
+    <button type="submit">Wyszukaj</button>
+    </form>
+
+{% if filter.qs %}
+<table border="1">
+  <thead>
+    <tr>
+      <th>Nazwa</th>
+      <th>Numer technologiczny</th>
+      <th>Instalacja</th>  
+      <th>Następny serwis do:</th>  
+      <th>Akcje</th>
+    </tr>
+  </thead>
+  <tbody>
+{% for service in filter.qs %}
+    <tr>
+        <td>{{ service.name }}</td>
+        <td>{{ service.date_time|date:"d.m.Y" }}</td>
+        <td>{{ service.probe }}</td>
+        <td>{{ service.next_service|date:"d.m.Y" }}</td>
+        <td>
+          <a href="{% url 'service-detail' pk=service.id %}"><button>Szczegóły</button></a>
+          <a type="button" href="{% url 'service-delete' pk=service.id %}"><button>Usuń</button></a>
+          <a type="button" href="{% url 'service-update' pk=service.id %}"><button>Modyfikuj</button></a>
+
+        </td>
+      </tr>
+    {% endfor %}
+  {% else %}
+      <tr>
+        <td colspan="2">Nie wykonano żadnego serwisu.</td>
+      </tr>
+  {% endif %}
+  </tbody>
+</table>
+
+
+    
 {% endblock %}

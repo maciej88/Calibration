@@ -38,13 +38,13 @@ class Probes(models.Model):
         return self.name
 
     def get_latest_service(self):
-        return self.services.order_by('-datetime').first()
+        return self.services.order_by('-date_time').first()
 
 
 class Services(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     name = models.CharField(choices=SERVICE_TYPES, verbose_name='Rodzaj obsługi:')
-    datetime = models.DateField(editable=True, verbose_name='Data wykonania:')
+    date_time = models.DateField(editable=True, verbose_name='Data wykonania:')
     probe = models.ForeignKey(Probes, related_name='services',
                               on_delete=models.CASCADE, verbose_name='Obsługiwane urządzenie:')
     next_service = models.DateField(verbose_name="Termin kolejnej obsługi:")

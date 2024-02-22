@@ -1,6 +1,13 @@
 <h1>Sondy</h1>
 {% extends 'base.html' %}
 {% block content %}
+    <form method="get">
+    <table>
+    {{ filter.form.as_table }}
+    </table>   
+    <button type="submit">Wyszukaj</button>
+    </form>
+{% if filter.qs %}
 <table border="1">
   <thead>
     <tr>
@@ -12,8 +19,8 @@
     </tr>
   </thead>
   <tbody>
-  {% if object_list %}
-    {% for probe in object_list %}
+  
+    {% for probe in filter.qs %}
       <tr>
         <td>{{ probe.name }}</td>
         <td>{{ probe.technology_id }}</td>

@@ -38,10 +38,10 @@ class ProbeUpdateForm(forms.ModelForm):
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Services
-        fields = ['name', 'datetime', 'next_service', 'description']
+        fields = ['name', 'date_time', 'next_service', 'description']
         widgets = {
             'name': forms.Select(attrs={'class': 'form-control', 'placeholder': ''}),
-            'datetime': forms.DateInput(attrs={'class': 'form-control',
+            'date_time': forms.DateInput(attrs={'class': 'form-control',
                                                'placeholder': 'Select a date', 'type': 'date'}),
             'next_service': forms.DateInput(attrs={'class': 'form-control',
                                                    'placeholder': 'Select a date', 'type': 'date'}),
