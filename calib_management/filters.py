@@ -1,6 +1,6 @@
 import django_filters
 from django import forms
-from django_filters import DateFilter, CharFilter, FilterSet
+from django_filters import DateFilter, FilterSet
 from .models import Probes, Services
 
 

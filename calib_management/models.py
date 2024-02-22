@@ -30,7 +30,7 @@ class Probes(models.Model):
                                      unique=False, verbose_name='Numer seryjny:')
     factory = models.CharField(max_length=128, unique=False, verbose_name='Producent: ')
     probe_model = models.CharField(max_length=128, unique=False, verbose_name='Model: ')
-    setup_date = models.DateField(editable=True, verbose_name='Data montażu: ') #jako data instalacji
+    setup_date = models.DateField(editable=True, verbose_name='Data montażu: ') #jako data montażu
     place = models.ForeignKey('Places', verbose_name='Instalacja: ',
                               on_delete=models.CASCADE, blank=True, null=True)
     description = models.TextField(verbose_name='Opis: ')
@@ -51,7 +51,8 @@ class Services(models.Model):
                               on_delete=models.CASCADE, verbose_name='Obsługiwane urządzenie:')
     next_service = models.DateField(verbose_name="Termin kolejnej obsługi:")
     description = models.TextField(max_length=512, blank=True, verbose_name='Opis wykonanych czynności:')
-    added_by = models.ForeignKey(User, verbose_name='Dodano przez:', on_delete=models.SET_NULL, null=True)
+    added_by = models.ForeignKey(User, verbose_name='Dodano przez:', on_delete=models.SET_NULL,
+                                 null=True)
 
     def __str__(self):
         return self.name

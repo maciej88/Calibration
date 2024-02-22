@@ -107,6 +107,7 @@ class ServiceCreateView(CreateView):
     success_url = '/'
 
     def form_valid(self, form):
+        form.instance.added_by = self.request.user
         pk = self.kwargs['pk']
         probe = Probes.objects.get(id=pk)
         form.instance.probe = probe

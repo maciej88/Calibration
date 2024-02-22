@@ -9,7 +9,6 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Dodaj serwis</button>
-        <a href="{% url 'probe_list' %}"><button>Lista sond pomiarowych</button></a>
     </form>
 </body>
 {% endblock %}
