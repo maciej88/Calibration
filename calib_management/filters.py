@@ -20,6 +20,7 @@ class ProbeFilter(django_filters.FilterSet):
     next_serv_to = DateFilter(field_name="services__next_service", lookup_expr="lte", label="Kolejna obsługa do:",
                               widget=forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'date'}))
 
+
 class ServiceFilter(FilterSet):
     serv_from_date = DateFilter(field_name="date_time", lookup_expr="gte", label="wykonanie od:",
                                 widget=forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'date'}))

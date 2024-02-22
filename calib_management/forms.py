@@ -66,10 +66,10 @@ class ServiceUpdateForm(forms.ModelForm):
 
 
 class CustomUserCreationForm(UserCreationForm):
-    first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
-    last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
-    username = forms.CharField(max_length=30, required=True, help_text='Wymagane')
-    password1 = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Hasło', 'type': 'password'})
+    first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Pierwsze imię")
+    last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Drugie imię")
+    username = forms.CharField(max_length=30, required=True, help_text='Wymagane', label="Login")
+    password1 = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Hasło', 'type': 'password'},)
     password2 = forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Powtórz hasło', 'type': 'password'})
 
     class Meta:
