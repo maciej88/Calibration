@@ -1,3 +1,4 @@
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from calib_management.models import Probes, Services, Places
@@ -172,10 +173,25 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('user-detail')
     form_class = UserUpdateForm
 
+    def get_success_url(self):
+        return reverse_lazy('user-detail', kwargs={'pk': self.object.pk})
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if self.request.user != obj:
+            raise PermissionDenied
+        return obj
+
 
 class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'user_detail.html'
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if self.request.user != obj:
+            raise PermissionDenied
+        return obj
 
 
 class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
