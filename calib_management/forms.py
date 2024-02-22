@@ -49,6 +49,21 @@ class ServiceForm(forms.ModelForm):
         }
 
 
+class ServiceUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Services
+        fields = ['name', 'date_time', 'next_service', 'description', 'added_by']
+        widgets = {
+            'name': forms.Select(attrs={'class': 'form-control', 'placeholder': ''}),
+            'date_time': forms.DateInput(attrs={'class': 'form-control',
+                                                'placeholder': 'Select a date', 'type': 'date'}),
+            'next_service': forms.DateInput(attrs={'class': 'form-control',
+                                                   'placeholder': 'Select a date', 'type': 'date'}),
+            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'added_by': forms.Select(attrs={'class': 'form-control', 'placeholder': ''})
+        }
+
+
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
     last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')

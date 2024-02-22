@@ -1,4 +1,6 @@
 import uuid
+
+from django.contrib.auth.models import User
 from django.db import models
 
 SERVICE_TYPES = (
@@ -49,6 +51,7 @@ class Services(models.Model):
                               on_delete=models.CASCADE, verbose_name='Obsługiwane urządzenie:')
     next_service = models.DateField(verbose_name="Termin kolejnej obsługi:")
     description = models.TextField(max_length=512, blank=True, verbose_name='Opis wykonanych czynności:')
+    added_by = models.ForeignKey(User, verbose_name='Dodano przez:', on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return self.name

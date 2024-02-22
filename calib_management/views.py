@@ -1,7 +1,9 @@
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
 from calib_management.models import Probes, Services, Places
-from calib_management.forms import PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm, UserUpdateForm, PassChangeForm
+from calib_management.forms import (
+    PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm, UserUpdateForm, PassChangeForm,
+    ServiceUpdateForm)
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -132,7 +134,7 @@ class ServiceDeleteView(LoginRequiredMixin, DeleteView):
 
 class ServiceUpdateView(LoginRequiredMixin, UpdateView):
     model = Services
-    form_class = ServiceForm
+    form_class = ServiceUpdateForm
     template_name = 'service_add.html'
     success_url = '/service-list/'
 

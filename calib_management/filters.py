@@ -29,9 +29,9 @@ class ServiceFilter(FilterSet):
                               widget=forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'date'}))
     next_serv_to = DateFilter(field_name="next_service", lookup_expr="lte", label="Kolejna obsługa do:",
                               widget=forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'date'}))
-    # description_search = CharFilter(field_name='description', lookup_expr='icontains', label='Wyszukaj w opisie:')
+    added_by_search = CharFilter(field_name='added_by', lookup_expr='icontains', label='Wyszukaj w opisie:')
 
     class Meta:
         model = Services
         fields = '__all__'
-        exclude = ['id', 'description', 'serv_from_date', 'serv_to_date', 'next_serv_from', 'next_serv_to']
+        exclude = ['id', 'description', 'added_by', 'serv_from_date', 'serv_to_date', 'next_serv_from', 'next_serv_to']

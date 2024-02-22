@@ -15,7 +15,8 @@
       <th>Nazwa</th>
       <th>Numer technologiczny</th>
       <th>Instalacja</th>  
-      <th>Następny serwis do:</th>  
+      <th>Następny serwis do</th>
+      <th>Wykonał</th>  
       <th>Akcje</th>
     </tr>
   </thead>
@@ -26,6 +27,7 @@
         <td>{{ service.date_time|date:"d.m.Y" }}</td>
         <td>{{ service.probe }}</td>
         <td>{{ service.next_service|date:"d.m.Y" }}</td>
+        <td>{{ service.added_by.last_name }}</td>
         <td>
           <a href="{% url 'service-detail' pk=service.id %}"><button>Szczegóły</button></a>
           <a type="button" href="{% url 'service-delete' pk=service.id %}"><button>Usuń</button></a>

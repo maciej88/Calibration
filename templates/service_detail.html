@@ -10,6 +10,7 @@
     <p>Obsługiwane urządzenie: {{ service.probe }}</p>
     <p>Termin kolejnej obsługi: {{ service.next_service }}</p>
     <p>Opis wykonanych czynności: {{ service.description }}</p>
+    <p>Wykonał: {{ service.added_by.last_name }} {{ service.added_by.first_name }}</p>
     <a href="{% url 'service-list' %}">Powrót do listy</a>
     <a type="button" href="{% url 'service-update' pk=service.id %}">"Modyfikuj"</a>
     <a type="button" href="{% url 'service-delete' pk=service.id %}">"Usuń"</a>
