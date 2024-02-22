@@ -4,7 +4,7 @@
     <form method="get">
     <table>
     {{ filter.form.as_table }}
-    </table>   
+    </table>
     <button type="submit">Wyszukaj</button>
     </form>
 {% if filter.qs %}
@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-  
+
     {% for probe in filter.qs %}
       <tr>
         <td>{{ probe.name }}</td>

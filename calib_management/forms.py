@@ -4,6 +4,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+
 class PlaceForm(forms.ModelForm):
     class Meta:
         model = Places
