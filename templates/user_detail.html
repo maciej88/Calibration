@@ -2,12 +2,12 @@
 {% block content %}
 <head>
     <meta charset="UTF-8">
-    <title>User Details</title>
+    <title>Szczegóły użytkownika</title>
 </head>
 <body>
-    <h1>User Details</h1>
-    <p>Username: {{ object.username }}</p>
-    <p>First Name: {{ object.first_name }}</p>
-    <p>Last Name: {{ object.last_name }}</p>
+    <h1>Szczegóły użytkownika:s</h1>
+    <p>Login: {{ object.username }}</p>
+    <p>Pierwsze imię: {{ object.first_name }}</p>
+    <p>Drugie imię (nazwisko): {{ object.last_name }}</p>
 </body>
 {% endblock %}

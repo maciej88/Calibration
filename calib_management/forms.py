@@ -78,9 +78,9 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
-    first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
-    last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.')
-    username = forms.CharField(max_length=30, required=True, help_text='Wymagane')
+    first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Pierwsze imię:")
+    last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Drugie imię:")
+    username = forms.CharField(max_length=30, required=True, help_text='Wymagane', label="Login")
 
     class Meta:
         model = User

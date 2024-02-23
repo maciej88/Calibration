@@ -4,8 +4,8 @@
 <ul>
 {% for place in object_list %}
     <li>{{ place.name }} 
-        <a type="button" href="{% url 'place-delete' pk=place.id %}">"Usuń"</a>
-        <a type="button" href="{% url 'place-update' pk=place.id %}">"Modyfikuj"</a></li>
+        <a type="button" href="{% url 'calib_management:place-delete' pk=place.id %}">"Usuń"</a>
+        <a type="button" href="{% url 'calib_management:place-update' pk=place.id %}">"Modyfikuj"</a></li>
 {% empty %}
     <li>Nie dodano żadnej instalacji.</li>
 {% endfor %}

@@ -29,9 +29,9 @@
         <td>{{ service.next_service|date:"d.m.Y" }}</td>
         <td>{{ service.added_by.last_name }}</td>
         <td>
-          <a href="{% url 'service-detail' pk=service.id %}"><button>Szczegóły</button></a>
-          <a type="button" href="{% url 'service-delete' pk=service.id %}"><button>Usuń</button></a>
-          <a type="button" href="{% url 'service-update' pk=service.id %}"><button>Modyfikuj</button></a>
+          <a href="{% url 'calib_management:service-detail' pk=service.id %}"><button>Szczegóły</button></a>
+          <a type="button" href="{% url 'calib_management:service-delete' pk=service.id %}"><button>Usuń</button></a>
+          <a type="button" href="{% url 'calib_management:service-update' pk=service.id %}"><button>Modyfikuj</button></a>
 
         </td>
       </tr>
