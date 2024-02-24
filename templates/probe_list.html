@@ -1,7 +1,7 @@
-
+<!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
-
+<!--- filter for probes in probes list --->
     <h2>Przeszukaj według kryteriów:</h2>
     <form method="get">
     <table>
@@ -10,6 +10,7 @@
     <button type="submit">Wyszukaj</button>
     </form>
 {% if filter.qs %}
+    <!--- probe list renderinf from filter querry set --->
 <table border="1">
   <thead>
     <tr>

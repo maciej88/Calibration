@@ -1,6 +1,7 @@
-<h1>Instalacje i miejsca</h1>
+<!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
+    <h1>Instalacje i miejsca</h1>
 <ul>
 {% for place in object_list %}
     <li>{{ place.name }} 

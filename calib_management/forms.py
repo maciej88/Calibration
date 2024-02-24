@@ -5,12 +5,14 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
 
+# place form for place create view:
 class PlaceForm(forms.ModelForm):
     class Meta:
         model = Places
         fields = '__all__'
 
 
+# probe form for probe create view
 class ProbeForm(forms.ModelForm):
     class Meta:
         model = Probes
@@ -30,12 +32,14 @@ class ProbeForm(forms.ModelForm):
         }
 
 
+# probe update for probe update view:
 class ProbeUpdateForm(forms.ModelForm):
     class Meta:
         model = Probes
         fields = '__all__'
 
 
+# probe service form for service create
 class ServiceForm(forms.ModelForm):
     class Meta:
         model = Services
@@ -50,6 +54,7 @@ class ServiceForm(forms.ModelForm):
         }
 
 
+# probe service update form:
 class ServiceUpdateForm(forms.ModelForm):
     class Meta:
         model = Services
@@ -65,6 +70,7 @@ class ServiceUpdateForm(forms.ModelForm):
         }
 
 
+# user creation form for user register:
 class CustomUserCreationForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Pierwsze imię")
     last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Drugie imię")
@@ -77,6 +83,7 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ('username', 'first_name', 'last_name', 'password1', 'password2')
 
 
+# user update form (no password):
 class UserUpdateForm(forms.ModelForm):
     first_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Pierwsze imię:")
     last_name = forms.CharField(max_length=30, required=True, help_text='Wymagane.', label="Drugie imię:")
@@ -87,6 +94,7 @@ class UserUpdateForm(forms.ModelForm):
         fields = ('username', 'first_name', 'last_name')
 
 
+# user password update form:
 class PassChangeForm(PasswordChangeForm):
     old_password = forms.CharField(label="Stare hasło", widget=forms.PasswordInput(
         attrs={'class': 'form-control', 'placeholder': 'Stare hasło'}))
@@ -99,16 +107,7 @@ class PassChangeForm(PasswordChangeForm):
         user = kwargs.pop('user', None)
         super().__init__(user, *args, **kwargs)
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['new_password1'].errorlist = {
-    #         'required': 'To pole jest wymagane.',
-    #         'password_too_short': 'Hasło musi zawierać co najmniej 8 znaków.',
-    #         'password_common': 'Hasło nie może być powszechnie używanym hasłem.',
-    #         'password_entirely_numeric': 'Hasło nie może składać się wyłącznie z cyfr.',
-    #         'password_similar': 'Hasło nie może być zbyt podobne do innych Twoich danych osobowych.',
-    #     }
 
-
+# user logout form (must bee pass):
 class LogoutForm(forms.Form):
     pass

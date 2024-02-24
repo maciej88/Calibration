@@ -1,5 +1,7 @@
+<!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
+    <!--- probe details --->
 <head>
     <title>{{ object.name }} - Szczegóły sondy</title>
 </head>
@@ -40,7 +42,7 @@
     <p>Opis:</p>
       <p>{{ object.description }}</p>
     <a type="button" href="{% url 'calib_management:add-service' pk=object.id %}"><button>Dodaj serwis</button></a>
-    
+    <!--- last service for probe --->
     {% if last_service %}
     <h2>Ostatni serwis</h2>
     <p>Rodzaj obsługi: {{ last_service.name }}</p>

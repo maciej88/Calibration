@@ -1,6 +1,8 @@
+<!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
 <h1>Lista wykonanych czynności</h1>
+    <!--- service list filter --->
     <form method="get">
 
     {{ filter.form.as_p }}
@@ -21,6 +23,7 @@
     </tr>
   </thead>
   <tbody>
+    <!--- rendering services from filter query set --->
 {% for service in filter.qs %}
     <tr>
         <td>{{ service.name }}</td>
