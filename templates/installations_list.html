@@ -2,13 +2,25 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Instalacje i miejsca</h1>
-<ul>
-{% for place in object_list %}
-    <li>{{ place.name }} 
-        <a type="button" href="{% url 'calib_management:place-delete' pk=place.id %}">"Usuń"</a>
-        <a type="button" href="{% url 'calib_management:place-update' pk=place.id %}">"Modyfikuj"</a></li>
+<table border="1">
+
+    <thead>
+    <tr>
+    <th>Nazwa</th>
+    <th>Akcje</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for place in object_list %}
+        <tr>
+        <td>{{ place.name }} </td>
+        <td>        <a type="button" href="{% url 'calib_management:place-delete' pk=place.id %}"><button>Usuń</button></a>
+        <a type="button" href="{% url 'calib_management:place-update' pk=place.id %}"><button>Modyfikuj</button></a></td>
+        </tr>
+    </tbody>
+
 {% empty %}
     <li>Nie dodano żadnej instalacji.</li>
 {% endfor %}
-</ul>
+</table>
 {% endblock %}
