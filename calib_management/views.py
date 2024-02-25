@@ -23,7 +23,7 @@ class PlaceCreateView(LoginRequiredMixin, CreateView):
     template_name = 'installation_create.html'
     model = Places
     form_class = PlaceForm
-    success_url = '/installations-list/'
+    success_url = 'calib_management:/installations-list/'
 
 
 # place update view:
@@ -31,7 +31,7 @@ class PlaceUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'installation_create.html'
     model = Places
     form_class = PlaceForm
-    success_url = '/installations/'
+    success_url = 'calib_management:/installations/'
 
 
 # place list view:
@@ -48,7 +48,7 @@ class PlaceListView(LoginRequiredMixin, ListView):
 class PlaceDeleteView(LoginRequiredMixin, DeleteView):
     model = Places
     template_name = 'installation_delete.html'
-    success_url = '/installations-list/'
+    success_url = 'calib_management:/installations-list/'
 
 
 # --- Probe CRUD ---
@@ -72,7 +72,7 @@ class ProbeCreateView(LoginRequiredMixin, CreateView):
     model = Probes
     template_name = 'probe_create.html'
     form_class = ProbeForm
-    success_url = '/'
+    success_url = 'calib_management:/'
 
 
 # probe update view
@@ -80,14 +80,14 @@ class ProbeUpdateView(LoginRequiredMixin, UpdateView):
     model = Probes
     template_name = 'probe_update.html'
     form_class = ProbeUpdateForm
-    success_url = '/'
+    success_url = 'calib_management:/'
 
 
 # probe delete view
 class ProbeDeleteView(LoginRequiredMixin, DeleteView):
     model = Probes
     template_name = 'probe_delete.html'
-    success_url = '/'
+    success_url = 'calib_management:/'
 
 
 # probe create vew:
@@ -114,7 +114,7 @@ class ServiceCreateView(CreateView):
     model = Services
     form_class = ServiceForm
     template_name = 'service_add.html'
-    success_url = '/'
+    success_url = 'calib_management:/'
 
     # taking user id for create service:
     def form_valid(self, form):
@@ -141,7 +141,7 @@ class ServiceListView(ListView):
 class ServiceDeleteView(LoginRequiredMixin, DeleteView):
     model = Services
     template_name = 'service_delete.html'
-    success_url = '/service-list/'
+    success_url = 'calib_management:/service-list/'
 
 
 # service update view:
@@ -149,7 +149,7 @@ class ServiceUpdateView(LoginRequiredMixin, UpdateView):
     model = Services
     form_class = ServiceUpdateForm
     template_name = 'service_add.html'
-    success_url = '/service-list/'
+    success_url = 'calib_management:/service-list/'
 
 
 # service detail view:
@@ -166,7 +166,7 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('login')
+            return redirect('calib_management:login')
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -176,7 +176,7 @@ def register(request):
 class CustomLogoutView(LoginRequiredMixin, View):
     def get(self, request):
         logout(request)
-        return redirect('/')
+        return redirect('calib_management:/')
 
     def post(self, request):
         return self.get(request)
@@ -186,12 +186,12 @@ class CustomLogoutView(LoginRequiredMixin, View):
 class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'user_update.html'
-    success_url = reverse_lazy('user-detail')
+    success_url = reverse_lazy('calib_management:user-detail')
     form_class = UserUpdateForm
 
     # redirect after success user update:
     def get_success_url(self):
-        return reverse_lazy('user-detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('calib_management:user-detail', kwargs={'pk': self.object.pk})
 
     # preventing to view other user via id in slug:
     def get_object(self, queryset=None):
@@ -222,7 +222,7 @@ class UserPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
 
     # redirect after success password change:
     def get_success_url(self):
-        return reverse_lazy('user-detail', kwargs={'pk': self.request.user.pk})
+        return reverse_lazy('calib_management:user-detail', kwargs={'pk': self.request.user.pk})
 
     # taking user id to success redirect to user details
     def get_form_kwargs(self):

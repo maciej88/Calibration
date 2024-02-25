@@ -134,5 +134,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'probe_list'
+# success url after success login
+LOGIN_REDIRECT_URL = 'calib_management:probe_list'
 
