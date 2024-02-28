@@ -2,8 +2,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <form method="post">{% csrf_token %}
-    <p>Czy na pewno chcesz usunąć "{{ object.name }} z dnia: {{ object.datetime|date:"d.m.Y" }}"?</p>
-    {{ form }}
-    <input type="submit" value="Potwierdź">
+    <p>Czy na pewno chcesz usunąć "{{ object.name }} z dnia: {{ object.date_time|date:"d.m.Y" }}"?</p>
+    <input type="submit" value="Potwierdź" class="btn btn-danger">
 </form>
 {% endblock %}

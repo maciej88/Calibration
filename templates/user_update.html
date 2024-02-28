@@ -1,17 +1,21 @@
 <!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Update User</title>
-</head>
-<body>
-    <h1>Update User</h1>
+    <head>
+        <meta charset="UTF-8">
+        <title>Update User</title>
+    </head>
+    <body>
+    <h2>Update User</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zapisz</button>
+        <table class="table table-bordered table-info">
+            {{ form.as_table }}
+        </table>
+        <button type="submit" class="btn btn-success">Zapisz zmiany</button>
     </form>
-    <a type="button" href="{% url 'calib_management:pass-change' %}"><button>Zmień hasło</button></a>
-</body>
+    <a type="button" href="{% url 'calib_management:pass-change' %}">
+        <button class="btn btn-danger">Zmień hasło</button>
+    </a>
+    </body>
 {% endblock %}

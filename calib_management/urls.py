@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 app_name = 'calib_management'
 
 urlpatterns = [
-    path('', ProbeListView.as_view(), name='probe_list'),
+    path('', ProbeListView.as_view(), name='probe-list'),
     path('installation-create/', PlaceCreateView.as_view(), name='place-create'),
     path('installations-list/', PlaceListView.as_view(), name='place-list'),
     path('installation-delete/<uuid:pk>/delete/', PlaceDeleteView.as_view(), name='place-delete'),
@@ -21,7 +21,7 @@ urlpatterns = [
     path('service-update/<uuid:pk>/update/', ServiceUpdateView.as_view(), name='service-update'),
     path('service-detail/<uuid:pk>', ServiceDetailView.as_view(), name='service-detail'),
     path('register/', register, name='register'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html', success_url='/'), name='login'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html', success_url=''), name='login'),
     path('user/<int:pk>/update/', UserUpdateView.as_view(), name='user-update'),
     path('user/<int:pk>/', UserDetailView.as_view(), name='user-detail'),
     path('user/password-change/', UserPasswordChangeView.as_view(), name='pass-change'),

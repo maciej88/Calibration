@@ -38,6 +38,7 @@ class PlaceUpdateView(LoginRequiredMixin, UpdateView):
 class PlaceListView(LoginRequiredMixin, ListView):
     model = Places
     template_name = 'installations_list.html'
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -59,6 +60,7 @@ class ProbeListView(ListView):
     model = Probes
     template_name = 'probe_list.html'
     context_object_name = 'probes'
+    paginate_by = 10
 
     # adding additional data to template: filter
     def get_context_data(self, **kwargs):
@@ -72,7 +74,7 @@ class ProbeCreateView(LoginRequiredMixin, CreateView):
     model = Probes
     template_name = 'probe_create.html'
     form_class = ProbeForm
-    success_url = 'calib_management:/'
+    success_url = reverse_lazy('calib_management:probe-list')
 
 
 # probe update view
@@ -80,14 +82,14 @@ class ProbeUpdateView(LoginRequiredMixin, UpdateView):
     model = Probes
     template_name = 'probe_update.html'
     form_class = ProbeUpdateForm
-    success_url = 'calib_management:/'
+    success_url = reverse_lazy('calib_management:probe-list')
 
 
 # probe delete view
 class ProbeDeleteView(LoginRequiredMixin, DeleteView):
     model = Probes
     template_name = 'probe_delete.html'
-    success_url = 'calib_management:/'
+    success_url = reverse_lazy('calib_management:probe-list')
 
 
 # probe create vew:
@@ -114,7 +116,7 @@ class ServiceCreateView(CreateView):
     model = Services
     form_class = ServiceForm
     template_name = 'service_add.html'
-    success_url = 'calib_management:/'
+    success_url = reverse_lazy('calib_management:probe-list')
 
     # taking user id for create service:
     def form_valid(self, form):
@@ -129,6 +131,7 @@ class ServiceCreateView(CreateView):
 class ServiceListView(ListView):
     model = Services
     template_name = 'service_list.html'
+    paginate_by = 10
 
     # adding additional data to template: filter
     def get_context_data(self, **kwargs):
@@ -166,7 +169,7 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('calib_management:login')
+            return reverse_lazy('calib_management:login')
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -176,7 +179,7 @@ def register(request):
 class CustomLogoutView(LoginRequiredMixin, View):
     def get(self, request):
         logout(request)
-        return redirect('calib_management:/')
+        return redirect('calib_management:probe-list')
 
     def post(self, request):
         return self.get(request)

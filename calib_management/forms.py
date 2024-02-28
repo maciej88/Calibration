@@ -27,7 +27,7 @@ class ProbeForm(forms.ModelForm):
             'probe_model': forms.TextInput(),
             'setup_date': forms.DateInput(attrs={'class': 'form-control',
                                                  'placeholder': 'Select a date', 'type': 'date'}),
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'description': forms.Textarea(attrs={'cols': 40, 'rows': 5}),
             'place': forms.Select(attrs={'class': 'form'})
         }
 

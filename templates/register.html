@@ -1,15 +1,17 @@
 <!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
-<head>
-    <title>Rejestracja</title>
-</head>
-<body>
+    <head>
+        <title>Rejestracja</title>
+    </head>
+    <body>
     <h2>Rejestracja</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zarejestruj się</button>
+        <table class="table table-bordered table-info">
+            {{ form.as_table }}
+        </table>
+        <button type="submit" class="btn btn-warning">Zarejstruj się</button>
     </form>
-</body>
+    </body>
 {% endblock %}

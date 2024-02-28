@@ -1,52 +1,58 @@
 <!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
-<h1>Lista wykonanych czynności</h1>
+    <h2>Lista wykonanych czynności</h2>
     <!--- service list filter --->
     <form method="get">
-
-    {{ filter.form.as_p }}
-  
-    <button type="submit">Wyszukaj</button>
+        <table class="table table-bordered table-info">
+            {{ filter.form.as_table }}
+        </table>
+        <button type="submit" class="btn btn-info">Wyszukaj</button>
     </form>
 
-{% if filter.qs %}
-<table border="1">
-  <thead>
-    <tr>
-      <th>Nazwa</th>
-      <th>Numer technologiczny</th>
-      <th>Instalacja</th>  
-      <th>Następny serwis do</th>
-      <th>Wykonał</th>  
-      <th>Akcje</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!--- rendering services from filter query set --->
-{% for service in filter.qs %}
-    <tr>
-        <td>{{ service.name }}</td>
-        <td>{{ service.date_time|date:"d.m.Y" }}</td>
-        <td>{{ service.probe }}</td>
-        <td>{{ service.next_service|date:"d.m.Y" }}</td>
-        <td>{{ service.added_by.last_name }}</td>
-        <td>
-          <a href="{% url 'calib_management:service-detail' pk=service.id %}"><button>Szczegóły</button></a>
-          <a type="button" href="{% url 'calib_management:service-delete' pk=service.id %}"><button>Usuń</button></a>
-          <a type="button" href="{% url 'calib_management:service-update' pk=service.id %}"><button>Modyfikuj</button></a>
+    {% if filter.qs %}
+        <table class="table table-bordered table-success">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Numer technologiczny</th>
+            <th>Instalacja</th>
+            <th>Następny serwis do</th>
+            <th>Wykonał</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--- rendering services from filter query set --->
+        {% for service in filter.qs %}
+            <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.date_time|date:"d.m.Y" }}</td>
+                <td>{{ service.probe }}</td>
+                <td>{{ service.next_service|date:"d.m.Y" }}</td>
+                <td>{{ service.added_by.last_name }}</td>
+                <td>
+                    <a href="{% url 'calib_management:service-detail' pk=service.id %}">
+                        <button type="button" class="btn btn-primary">Szczegóły</button>
+                    </a>
+                    <a type="button" href="{% url 'calib_management:service-delete' pk=service.id %}">
+                        <button type="button" class="btn btn-danger">Usuń</button>
+                    </a>
+                    <a type="button" href="{% url 'calib_management:service-update' pk=service.id %}">
+                        <button type="button" class="btn btn-light">Modyfikuj</button>
+                    </a>
 
-        </td>
-      </tr>
-    {% endfor %}
-  {% else %}
-      <tr>
-        <td colspan="2">Nie wykonano żadnego serwisu.</td>
-      </tr>
-  {% endif %}
-  </tbody>
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="2">Nie wykonano żadnego serwisu.</td>
+        </tr>
+    {% endif %}
+</tbody>
 </table>
 
 
-    
+
 {% endblock %}

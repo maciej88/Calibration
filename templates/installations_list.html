@@ -1,8 +1,8 @@
 <!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Instalacje i miejsca</h1>
-<table border="1">
+    <h2>Instalacje i miejsca</h2>
+<table class="table table-bordered table-success">
 
     <thead>
     <tr>
@@ -14,8 +14,8 @@
     {% for place in object_list %}
         <tr>
         <td>{{ place.name }} </td>
-        <td>        <a type="button" href="{% url 'calib_management:place-delete' pk=place.id %}"><button>Usuń</button></a>
-        <a type="button" href="{% url 'calib_management:place-update' pk=place.id %}"><button>Modyfikuj</button></a></td>
+        <td>        <a type="button" href="{% url 'calib_management:place-delete' pk=place.id %}"><button class="btn btn-danger">Usuń</button></a>
+        <a type="button" href="{% url 'calib_management:place-update' pk=place.id %}"><button class="btn btn-light">Modyfikuj</button></a></td>
         </tr>
     </tbody>
 

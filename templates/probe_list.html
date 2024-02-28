@@ -1,48 +1,54 @@
 <!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
-<!--- filter for probes in probes list --->
+    <!--- filter for probes in probes list --->
     <h2>Przeszukaj według kryteriów:</h2>
     <form method="get">
-    <table>
-    {{ filter.form.as_table }}
-    </table>
-    <button type="submit">Wyszukaj</button>
+        <table class="table table-bordered table-info">
+            {{ filter.form.as_table }}
+        </table>
+        <button type="submit" class="btn btn-info">Wyszukaj</button>
     </form>
-{% if filter.qs %}
-    <!--- probe list renderinf from filter query set --->
-<table border="1">
-  <thead>
-    <tr>
-      <th>Nazwa</th>
-      <th>Numer technologiczny</th>
-      <th>Instalacja</th>  
-      <th>Następny serwis do:</th>  
-      <th>Akcje</th>
-    </tr>
-  </thead>
-  <tbody>
+    {% if filter.qs %}
+        <!--- probe list renderinf from filter query set --->
+        <table class="table table-bordered table-success">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Numer technologiczny</th>
+            <th>Instalacja</th>
+            <th>Następny serwis do:</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody>
 
-    {% for probe in filter.qs %}
-      <tr>
-        <td>{{ probe.name }}</td>
-        <td>{{ probe.technology_id }}</td>
-        <td>{{ probe.place }}</td>
-        <td>{{ probe.get_latest_service.next_service|date:"d.m.Y" }}</td>
-        <td>
-          <a href="{% url 'calib_management:probe-detail' pk=probe.id %}"><button>Szczegóły</button></a>
-            {% if user.is_authenticated %}
-          <a type="button" href="{% url 'calib_management:probe-delete' pk=probe.id %}"><button>Usuń</button></a>
-          <a type="button" href="{% url 'calib_management:probe-update' pk=probe.id %}"><button>Modyfikuj</button></a>
-            {% endif %}
-        </td>
-      </tr>
-    {% endfor %}
-  {% else %}
-      <tr>
-        <td colspan="2">Nie dodano żadnej sondy.</td>
-      </tr>
-  {% endif %}
-  </tbody>
+        {% for probe in filter.qs %}
+            <tr>
+                <td>{{ probe.name }}</td>
+                <td>{{ probe.technology_id }}</td>
+                <td>{{ probe.place }}</td>
+                <td>{{ probe.get_latest_service.next_service|date:"d.m.Y" }}</td>
+                <td>
+                    <a href="{% url 'calib_management:probe-detail' pk=probe.id %}">
+                        <button type="button" class="btn btn-primary">Szczegóły</button>
+                    </a>
+                    {% if user.is_authenticated %}
+                        <a type="button" href="{% url 'calib_management:probe-delete' pk=probe.id %}">
+                            <button type="button" class="btn btn-danger">Usuń</button>
+                        </a>
+                        <a type="button" href="{% url 'calib_management:probe-update' pk=probe.id %}">
+                            <button type="button" class="btn btn-light">Modyfikuj</button>
+                        </a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="2">Nie dodano żadnej sondy.</td>
+        </tr>
+    {% endif %}
+</tbody>
 </table>
 {% endblock %}

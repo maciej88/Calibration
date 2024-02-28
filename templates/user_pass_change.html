@@ -6,11 +6,13 @@
     <title>Zmiana hasła</title>
 </head>
 <body>
-    <h1>Zmiana hasła</h1>
+    <h2>Zmiana hasła</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Zapisz</button>
+        <table class="table table-bordered table-info">
+        {{ form.as_table }}
+        </table>
+        <button type="submit" class="btn btn-success">Zapisz zmiany</button>
     </form>
 </body>
 {% endblock %}

@@ -1,14 +1,17 @@
 <!--- load base.html --->
 {% extends 'base.html' %}
 {% block content %}
-<head>
-    <meta charset="UTF-8">
-    <title>Szczegóły użytkownika</title>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Szczegóły użytkownika</title>
+    </head>
+    <body>
     <h1>Szczegóły użytkownika:</h1>
     <p>Login: {{ object.username }}</p>
     <p>Pierwsze imię: {{ object.first_name }}</p>
     <p>Drugie imię (nazwisko): {{ object.last_name }}</p>
-</body>
+    <a href="{% url 'calib_management:user-update' pk=user.id %}">
+        <button class="btn btn-light">Modyfikuj konto</button>
+        
+    </body>
 {% endblock %}
