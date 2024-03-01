@@ -7,7 +7,7 @@ Instruction to use:
 4. setup a venv:
    $  python3 -m venv {here name of venv}
 5. $ pip3 install -r requirements.txt
-6. make ".env" file with structure:
+6. make ".env" file (secret) with structure:
    '# secret key:
    SECRET_KEY = 'here secret key as string'
    '# postgres database (you own config):
