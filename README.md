@@ -16,6 +16,8 @@ Instruction to use:
    HOST = 'localhost'
    PORT = '5432'
    NAME = 'calibration'
-7. $ python3 manage.py makemigrations
-8. $ python3 manage.py migrate
-9. $ python3 manage.py runserver
+7. $ pip3 install -r requirements.txt 
+8. $ python3 manage.py makemigrations
+9. $ python3 manage.py makemigrations calib_management
+10. $ python3 manage.py migrate
+11. $ python3 manage.py runserver
