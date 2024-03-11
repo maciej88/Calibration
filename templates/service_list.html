@@ -15,8 +15,9 @@
         <thead>
         <tr>
             <th>Nazwa</th>
+            <th>Data serwisu</th>
+            <th>Instalacja (miejsce):</th>
             <th>Numer technologiczny</th>
-            <th>Instalacja</th>
             <th>Następny serwis do</th>
             <th>Wykonał</th>
             <th>Akcje</th>
@@ -28,7 +29,8 @@
             <tr>
                 <td>{{ service.name }}</td>
                 <td>{{ service.date_time|date:"d.m.Y" }}</td>
-                <td>{{ service.probe }}</td>
+                <td>{{ service.probe.place }}</td>
+                <td>{{ service.probe.technology_id }}</td>
                 <td>{{ service.next_service|date:"d.m.Y" }}</td>
                 <td>{{ service.added_by.last_name }}</td>
                 <td>
@@ -44,6 +46,7 @@
 
                 </td>
             </tr>
+            
         {% endfor %}
     {% else %}
         <tr>

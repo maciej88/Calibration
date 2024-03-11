@@ -27,7 +27,7 @@ class ProbeForm(forms.ModelForm):
             'probe_model': forms.TextInput(),
             'setup_date': forms.DateInput(attrs={'class': 'form-control',
                                                  'placeholder': 'Select a date', 'type': 'date'}),
-            'description': forms.Textarea(attrs={'cols': 40, 'rows': 5}),
+            'description': forms.Textarea(),
             'place': forms.Select(attrs={'class': 'form'})
         }
 
@@ -50,7 +50,7 @@ class ServiceForm(forms.ModelForm):
                                                'placeholder': 'Select a date', 'type': 'date'}),
             'next_service': forms.DateInput(attrs={'class': 'form-control',
                                                    'placeholder': 'Select a date', 'type': 'date'}),
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'description': forms.Textarea(),
         }
 
 
@@ -65,7 +65,7 @@ class ServiceUpdateForm(forms.ModelForm):
                                                 'placeholder': 'Select a date', 'type': 'date'}),
             'next_service': forms.DateInput(attrs={'class': 'form-control',
                                                    'placeholder': 'Select a date', 'type': 'date'}),
-            'description': forms.Textarea(attrs={'cols': 80, 'rows': 20}),
+            'description': forms.Textarea(),
             'added_by': forms.Select(attrs={'class': 'form-control', 'placeholder': ''})
         }
 

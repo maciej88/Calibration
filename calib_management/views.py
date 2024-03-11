@@ -23,7 +23,7 @@ class PlaceCreateView(LoginRequiredMixin, CreateView):
     template_name = 'installation_create.html'
     model = Places
     form_class = PlaceForm
-    success_url = 'calib_management:/installations-list/'
+    success_url = reverse_lazy('calib_management:place-list')
 
 
 # place update view:
@@ -31,14 +31,13 @@ class PlaceUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'installation_create.html'
     model = Places
     form_class = PlaceForm
-    success_url = 'calib_management:/installations/'
+    success_url = reverse_lazy('calib_management:place-list')
 
 
 # place list view:
 class PlaceListView(LoginRequiredMixin, ListView):
     model = Places
     template_name = 'installations_list.html'
-    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -49,7 +48,7 @@ class PlaceListView(LoginRequiredMixin, ListView):
 class PlaceDeleteView(LoginRequiredMixin, DeleteView):
     model = Places
     template_name = 'installation_delete.html'
-    success_url = 'calib_management:/installations-list/'
+    success_url = reverse_lazy('calib_management:place-list')
 
 
 # --- Probe CRUD ---
@@ -60,7 +59,6 @@ class ProbeListView(ListView):
     model = Probes
     template_name = 'probe_list.html'
     context_object_name = 'probes'
-    paginate_by = 10
 
     # adding additional data to template: filter
     def get_context_data(self, **kwargs):
@@ -75,6 +73,11 @@ class ProbeCreateView(LoginRequiredMixin, CreateView):
     template_name = 'probe_create.html'
     form_class = ProbeForm
     success_url = reverse_lazy('calib_management:probe-list')
+
+    # go to new probe
+    def get_success_url(self):
+        probe_id = self.object.pk
+        return reverse_lazy('calib_management:probe-detail', kwargs={'pk': probe_id})
 
 
 # probe update view
@@ -131,7 +134,6 @@ class ServiceCreateView(CreateView):
 class ServiceListView(ListView):
     model = Services
     template_name = 'service_list.html'
-    paginate_by = 10
 
     # adding additional data to template: filter
     def get_context_data(self, **kwargs):
@@ -144,7 +146,7 @@ class ServiceListView(ListView):
 class ServiceDeleteView(LoginRequiredMixin, DeleteView):
     model = Services
     template_name = 'service_delete.html'
-    success_url = 'calib_management:/service-list/'
+    success_url = reverse_lazy('calib_management:service-list')
 
 
 # service update view:
@@ -152,7 +154,7 @@ class ServiceUpdateView(LoginRequiredMixin, UpdateView):
     model = Services
     form_class = ServiceUpdateForm
     template_name = 'service_add.html'
-    success_url = 'calib_management:/service-list/'
+    success_url = reverse_lazy('calib_management:service-list')
 
 
 # service detail view:
@@ -169,7 +171,7 @@ def register(request):
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return reverse_lazy('calib_management:login')
+            return redirect(reverse_lazy('calib_management:login'))
     else:
         form = CustomUserCreationForm()
     return render(request, 'register.html', {'form': form})
