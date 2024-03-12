@@ -10,26 +10,38 @@
         <thead>
         <tr>
             <th>Nazwa</th>
-            <th>Numer technologiczny</th>
-            <th>Instalacja</th>
-            <th>Następny serwis do:</th>
-            <th>Numer seryjny</th>
-            <th>Producent</th>
-            <th>Model</th>
-            <th>Data montażu</th>
-            <th>Czy sprawna</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
             <td>{{ object.name }}</td>
+        </tr>
+        <tr>
+            <th>Numer technologiczny</th>
             <td>{{ object.technology_id }}</td>
+        </tr>
+        <tr>
+            <th>Instalacja</th>
             <td>{{ object.place }}</td>
+        </tr>
+        <tr>
+            <th>Następny serwis do:</th>
             <td>{{ object.get_latest_service.next_service|date:"d.m.Y" }}</td>
+        </tr>
+        <tr>
+            <th>Numer seryjny</th>
             <td>{{ object.serial_number }}</td>
+        </tr>
+        <tr>
+            <th>Producent</th>
             <td>{{ object.factory }}</td>
+        </tr>
+        <tr>
+            <th>Model</th>
             <td>{{ object.probe_model }}</td>
+        </tr>
+        <tr>
+            <th>Data montażu</th>
             <td>{{ object.setup_date|date:"d.m.Y" }}</td>
+        </tr>
+        <tr>
+            <th>Czy sprawna</th>
             <td>
                 {% if object.status == True %} Tak
                 {% else %}
@@ -37,7 +49,7 @@
                 {% endif %}
             </td>
         </tr>
-        </tbody>
+        </thead>
     </table>
     <p>Opis:</p>
     <p>{{ object.description }}</p>

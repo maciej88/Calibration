@@ -2,9 +2,11 @@
 {% extends 'base.html' %}
 {% block content %}
     <form method="post">{% csrf_token %}
+        <div class="table-responsive">
         <table class="table table-bordered table-info">
             {{ form.as_table }}
         </table>
         <input type="submit" value="Stwórz instalację" class="btn btn-success">
+        </div>
     </form>
 {% endblock %}

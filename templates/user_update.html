@@ -9,9 +9,11 @@
     <h2>Update User</h2>
     <form method="post">
         {% csrf_token %}
-        <table class="table table-bordered table-info">
-            {{ form.as_table }}
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-info">
+                {{ form.as_table }}
+            </table>
+        </div>
         <button type="submit" class="btn btn-success">Zapisz zmiany</button>
     </form>
     <a type="button" href="{% url 'calib_management:pass-change' %}">

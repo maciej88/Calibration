@@ -8,9 +8,11 @@
     <h1>Dodaj serwis dla sondy {{ probe.name }}</h1>
     <form method="post">
         {% csrf_token %}
-        <table class="table table-bordered table-info">
-            {{ form.as_table }}
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-info">
+                {{ form.as_table }}
+            </table>
+        </div>
         <button type="submit" class="btn btn-success">Zapisz zmiany</button>
     </form>
     </body>

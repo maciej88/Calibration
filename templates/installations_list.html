@@ -2,25 +2,32 @@
 {% extends 'base.html' %}
 {% block content %}
     <h2>Instalacje i miejsca</h2>
-<table class="table table-bordered table-success">
+    <div class="table-responsive">
+        <table class="table table-bordered table-success">
 
-    <thead>
-    <tr>
-    <th>Nazwa</th>
-    <th>Akcje</th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for place in object_list %}
-        <tr>
-        <td>{{ place.name }} </td>
-        <td>        <a type="button" href="{% url 'calib_management:place-delete' pk=place.id %}"><button class="btn btn-danger">Usuń</button></a>
-        <a type="button" href="{% url 'calib_management:place-update' pk=place.id %}"><button class="btn btn-light">Modyfikuj</button></a></td>
-        </tr>
-    </tbody>
 
-{% empty %}
-    <li>Nie dodano żadnej instalacji.</li>
-{% endfor %}
-</table>
+            <thead>
+            <tr>
+                <th>Nazwa</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for place in object_list %}
+                <tr>
+                    <td>{{ place.name }} </td>
+                    <td><a type="button" href="{% url 'calib_management:place-delete' pk=place.id %}">
+                        <button class="btn btn-danger">Usuń</button>
+                    </a>
+                        <a type="button" href="{% url 'calib_management:place-update' pk=place.id %}">
+                            <button class="btn btn-light">Modyfikuj</button>
+                        </a></td>
+                </tr>
+                </tbody>
+
+            {% empty %}
+                <li>Nie dodano żadnej instalacji.</li>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

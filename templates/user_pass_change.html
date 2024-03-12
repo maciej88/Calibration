@@ -9,9 +9,11 @@
     <h2>Zmiana hasła</h2>
     <form method="post">
         {% csrf_token %}
+        <div class="table-responsive">
         <table class="table table-bordered table-info">
         {{ form.as_table }}
         </table>
+        </div>
         <button type="submit" class="btn btn-success">Zapisz zmiany</button>
     </form>
 </body>

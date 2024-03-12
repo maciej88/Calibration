@@ -3,14 +3,17 @@
 {% block content %}
     <!--- filter for probes in probes list --->
     <h2>Przeszukaj według kryteriów:</h2>
-    <form method="get">
-        <table class="table table-bordered table-info">
-            {{ filter.form.as_table }}
-        </table>
-        <button type="submit" class="btn btn-info">Wyszukaj</button>
-    </form>
+    <div class="table-responsive">
+        <form method="get">
+            <table class="table table-bordered table-info">
+                {{ filter.form.as_table }}
+            </table>
+            <button type="submit" class="btn btn-info">Wyszukaj</button>
+        </form>
+    </div>
     {% if filter.qs %}
         <!--- probe list rendering from filter query set --->
+        <div class="table-responsive">
         <table class="table table-bordered table-success">
         <thead>
         <tr>
@@ -44,7 +47,7 @@
                 </td>
             </tr>
             <tr>
-            
+
             </tr>
         {% endfor %}
     {% else %}
@@ -54,5 +57,6 @@
     {% endif %}
 </tbody>
 </table>
-    
+</div>
+
 {% endblock %}
