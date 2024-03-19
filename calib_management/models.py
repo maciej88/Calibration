@@ -6,7 +6,6 @@ from django.db import models
 SERVICE_TYPES = (
     ('Kalibracja', 'Kalibracja'),
     ('Konserwacja', 'Konserwacja'),
-    ('Montaż', 'Montaż'),
     ('Czyszczenie', 'Czyszczenie'),
     ('Justowanie', 'Justowanie'),
     ('Wzorcowanie', 'Wzorcowanie')
@@ -39,6 +38,7 @@ class Probes(models.Model):
     def __str__(self):
         return self.name
 
+    # probes order by:
     def get_latest_service(self):
         return self.services.order_by('-date_time').first()
 

@@ -5,11 +5,6 @@ from .models import Probes, Services
 
 
 class ProbeFilter(django_filters.FilterSet):
-    probe_from_date = DateFilter(field_name="setup_date", lookup_expr="gte", label='Montaż od daty:',
-                                 widget=forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'date'}))
-    probe_to_date = DateFilter(field_name="setup_date", lookup_expr="lte", label="Montaż do daty:",
-                               widget=forms.DateInput(attrs={'placeholder': 'Select a date', 'type': 'date'}))
-
     class Meta:
         model = Probes
         fields = '__all__'

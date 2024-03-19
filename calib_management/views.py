@@ -1,6 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
+from django.db.models import Max
 from calib_management.models import Probes, Services, Places
 from calib_management.forms import (
     PlaceForm, ProbeForm, ProbeUpdateForm, ServiceForm, UserUpdateForm, PassChangeForm,
@@ -59,6 +60,13 @@ class ProbeListView(ListView):
     model = Probes
     template_name = 'probe_list.html'
     context_object_name = 'probes'
+    # ordering = ['services__next_service']
+
+    # Pick up for view, last added service
+    def get_queryset(self):
+        return Probes.objects.annotate(
+            latest_service=Max('services__date_time')
+        ).distinct()
 
     # adding additional data to template: filter
     def get_context_data(self, **kwargs):
