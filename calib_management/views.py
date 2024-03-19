@@ -80,7 +80,6 @@ class ProbeCreateView(LoginRequiredMixin, CreateView):
     model = Probes
     template_name = 'probe_create.html'
     form_class = ProbeForm
-    success_url = reverse_lazy('calib_management:probe-detail')
 
     # go to new probe
     def get_success_url(self):
