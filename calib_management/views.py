@@ -64,11 +64,12 @@ class ProbeListView(ListView):
 
     # Pick up for view, last added service
     def get_queryset(self):
-        return Probes.objects.annotate(
-            latest_service=Max('services__date_time')
-        ).distinct()
+        queryset = Probes.objects.prefetch_related('services').annotate(
+            latest_service=Max('services__date_time'),
+            next_service=Max('services__next_service'),
+        ).order_by('next_service')
+        return queryset
 
-    # adding additional data to template: filter
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['filter'] = ProbeFilter(self.request.GET, queryset=self.get_queryset())
