@@ -57,3 +57,6 @@ class Services(models.Model):
     def __str__(self):
         return self.name
 
+class Nameplate(models.Model):
+    name = models.CharField(max_length=64, verbose_name='Nazwa')
+    image = models.ImageField(upload_to='nameplates/')
